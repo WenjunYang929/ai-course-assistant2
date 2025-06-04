@@ -54,18 +54,17 @@ if info_file and pdf_files:
         for page in doc:
             pdf_text += page.get_text()
 
-    # 构造 prompt
-    prompt = f"""
+prompt = f"""
 You are an expert Instructional Designer working on internal Admin training in Rise.
 
 You are given:
-1. The **PDF** export of the current Admin training course.
+1. A set of **PDF exports** of Rise Admin Training modules. Each PDF represents **one full Module**.
 2. A table of **product feature updates**, including which permissions level each update applies to.
 
-❗️Important structure rule:
-- The **Module** name should be extracted from the **PDF filename** or the **top-level large title** at the beginning of the document.
-- The **Lesson** title corresponds to each **section heading** within the module (usually bolded, left-aligned, or numbered).
-- The **Specific Area** refers to where the suggested update should go (e.g., “first paragraph,” “demo hotspot,” “graphic block,” etc.)
+🧠 Important Structure Rules:
+- **Each PDF file is one Module**, and the **Module name must be taken directly from the file name** (e.g., `End-to-End DataGuide Document Template Workflow`)
+- **Lesson** corresponds to the individual lesson titles (usually top-level section titles within the PDF).
+- **Specific Area** refers to the exact area within the lesson: "first paragraph", "demo hotspot", "screenshot block", etc.
 
 Your job:
 - Only review the feature updates where the column **Permissions Needed** is **"Administrator Level"**.
@@ -76,8 +75,8 @@ Your job:
 Output a markdown table with these columns:
 
 - **Location**: Format `Module > Lesson > Specific Area`, e.g.:
-  - `End-to-End Workflow > Course Introduction > first paragraph`
-  - `Managing Setup > Lesson 3 > Hotspot: Set Role Access`
+  - `End-to-End DataGuide Document Template Workflow > Course Introduction > first paragraph`
+  - `End-to-End DataGuide Form Workflow > Lesson 2 > Demo: Submit Form`
 - **Suggested Changes**:  
   - Be instructional and clear.  
   - If it's a paragraph update, give the **full revised version**.  
@@ -94,6 +93,7 @@ Training Content (excerpt):
 Feature Update Info Table:
 {feature_md_table[:3000]}
 """
+
 
 
     with st.spinner("🧠 AI 正在生成更新建议..."):
