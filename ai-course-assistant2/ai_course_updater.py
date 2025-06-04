@@ -4,6 +4,7 @@ import openpyxl
 import fitz  # PyMuPDF
 import io
 from openai import OpenAI
+from tabulate import tabulate
 
 # 初始化 OpenAI
 client = OpenAI(
