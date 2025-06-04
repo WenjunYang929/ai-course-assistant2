@@ -54,7 +54,8 @@ if info_file and pdf_files:
         for page in doc:
             pdf_text += page.get_text()
 
-prompt = f"""
+    # 构造 Prompt
+    prompt = f"""
 You are an expert Instructional Designer working on internal Admin training in Rise.
 
 You are given:
@@ -93,6 +94,7 @@ Training Content (excerpt):
 Feature Update Info Table:
 {feature_md_table[:3000]}
 """
+
     with st.spinner("🧠 AI 正在生成更新建议..."):
         response = client.chat.completions.create(
             model="gpt-4o-mini",
@@ -124,3 +126,4 @@ Feature Update Info Table:
         file_name="AI_Feedback.xlsx",
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
+
