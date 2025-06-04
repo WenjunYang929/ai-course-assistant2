@@ -62,6 +62,11 @@ You are given:
 1. The **PDF** export of the current Admin training course.
 2. A table of **product feature updates**, including which permissions level each update applies to.
 
+❗️Important structure rule:
+- The **Module** name should be extracted from the **PDF filename** or the **top-level large title** at the beginning of the document.
+- The **Lesson** title corresponds to each **section heading** within the module (usually bolded, left-aligned, or numbered).
+- The **Specific Area** refers to where the suggested update should go (e.g., “first paragraph,” “demo hotspot,” “graphic block,” etc.)
+
 Your job:
 - Only review the feature updates where the column **Permissions Needed** is **"Administrator Level"**.
 - Among these, **only select those that impact how Admins should use, configure, or understand the system**. Skip those that do not affect Admin workflows.
@@ -89,6 +94,7 @@ Training Content (excerpt):
 Feature Update Info Table:
 {feature_md_table[:3000]}
 """
+
 
     with st.spinner("🧠 AI 正在生成更新建议..."):
         response = client.chat.completions.create(
