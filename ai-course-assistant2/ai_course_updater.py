@@ -93,9 +93,6 @@ Training Content (excerpt):
 Feature Update Info Table:
 {feature_md_table[:3000]}
 """
-
-
-
     with st.spinner("🧠 AI 正在生成更新建议..."):
         response = client.chat.completions.create(
             model="gpt-4o-mini",
